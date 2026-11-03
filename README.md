@@ -108,7 +108,7 @@ Run every file with **Run Script (F5)**.
 |---|---|
 | `schema_create_tables_output.png` | Tables created |
 | `schema_sample_data_output.png` | Sample data counts 12, 6, 28, 9 |
-| `compile_<name>_output.png` | Each procedure and function compiled with no errors |
+| `compile_log_error_output.png` | Each procedure and function compiled with no errors |
 | `functions_check_query_output.png` | Quick check of the four functions |
 | `test_success_cases_part1_output.png` | Tests S1 to S3 |
 | `test_success_cases_part2_output.png` | Tests S4 to S6 |
