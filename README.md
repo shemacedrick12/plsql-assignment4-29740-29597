@@ -119,11 +119,18 @@ Run every file with **Run Script (F5)**.
 | `compile_bulk_upload_grades_output.png` | Each procedure and function compiled with no errors |
 | `functions_check_query_output.png` | Quick check of the four functions |
 |`functions_from_sql_output.png` | Quick check of the four functions |
-| `test_error_cases_part1_output.png` | Tests S1 to S3 |
-| `test_error_cases_part2_output.png` | Tests S4 to S5 |
-| `test_error_cases_part3_output.png` | Test S6 to S7 |
-| `test_error_cases_part4_output.png` | Tests S8 to S9 |
-| `test_error_cases_part5_output.png` | Tests S10 to S11 |
+| `test_error_cases_part1_output.png` |  Test E1 to E3 |
+| `test_error_cases_part2_output.png` |  Test E4 to E5 |
+| `test_error_cases_part3_output.png` | Test E6 to E7  |
+| `test_error_cases_part4_output.png` | Test E8 to E9 |
+| `test_error_cases_part5_output.png` | Test E10 to E11 |
+|`functions_from_sql_output.png `| Test S1: functions called from SQL|
+|`course_seats_output.png `| Test S1: seats left per course|
+|`register_student_success_output.png`| Test S2: new enrollment |
+|` drop_enrollment_success_output.png`| Test S3: drop with and without a grade |
+|` register_student_reactivate_output.png`| Test S4: dropped enrollment re-activated |
+|` bulk_upload_grades_success_output.png`| Test S5: bulk upload, all rows valid |
+|` print_transcript_success_output.png`| Test S6: transcript and GPA |
 
 
 ## Contributions
