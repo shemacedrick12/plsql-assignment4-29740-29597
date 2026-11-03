@@ -109,13 +109,22 @@ Run every file with **Run Script (F5)**.
 | `schema_create_tables_output.png` | Tables created |
 | `schema_sample_data_output.png` | Sample data counts 12, 6, 28, 9 |
 | `compile_log_error_output.png` | Each procedure and function compiled with no errors |
+| `compile_print_transcript_output.png` | Each procedure and function compiled with no errors |
+| `compile_register_student_output.png` | Each procedure and function compiled with no errors |
+| `compile_get_letter_grade_output.png` | Each procedure and function compiled with no errors |
+| `compile_get_available_seats_output.png` | Each procedure and function compiled with no errors |
+| `compile_find_student_id_output.png` | Each procedure and function compiled with no errors |
+| `compile_drop_enrollemnt_output.png` | Each procedure and function compiled with no errors |
+| `compile_calculate_gpa_grades_output.png` | Each procedure and function compiled with no errors |
+| `compile_bulk_upload_grades_output.png` | Each procedure and function compiled with no errors |
 | `functions_check_query_output.png` | Quick check of the four functions |
-| `test_success_cases_part1_output.png` | Tests S1 to S3 |
-| `test_success_cases_part2_output.png` | Tests S4 to S6 |
-| `test_success_cases_part3_output.png` | Test S7 |
-| `test_error_cases_part1_output.png` | Tests E1 to E3 |
-| `test_error_cases_part2_output.png` | Tests E4 to E7 |
-| `test_error_cases_part3_output.png` | Tests E8 to E11 |
+|`functions_from_sql_output.png` | Quick check of the four functions |
+| `test_error_cases_part1_output.png` | Tests S1 to S3 |
+| `test_error_cases_part2_output.png` | Tests S4 to S5 |
+| `test_error_cases_part3_output.png` | Test S6 to S7 |
+| `test_error_cases_part4_output.png` | Tests S8 to S9 |
+| `test_error_cases_part5_output.png` | Tests S10 to S11 |
+
 
 ## Contributions
 
