@@ -128,8 +128,12 @@ Run every file with **Run Script (F5)**.
 
 ## Contributions
 
-*[,Both members worked together on design, coding, testing and documentation. All commits were made from one GitHub account (shemacedrick12), as permitted by the lecturer.”SHEMA MFIZI CEDRICK DID 02_FUNCTIONS AND 03_TESTS WHILE IRADUKUNDA EMMANUEL DID 00_SCHEMA AND 01_PROCEDURES ]*
+Both members worked together on the design, coding, testing and documentation.
+All commits were made from one GitHub account (shemacedrick12), as permitted by the lecturer.
 
+- SHEMA MFIZI CEDRICK (29740): 02_functions and 03_tests
+- IRADUKUNDA EMMANUEL (29597): 00_schema and 01_procedures
+  
 ## Use of AI
 
 We used an AI assistant (Claude, by Anthropic) during this assignment. It was used to propose the scenario and the schema, to draft the SQL and PL/SQL code and the test scripts, to help debug compile errors, and to draft the README and implementation notes. We ran every script in Oracle SQL Developer ourselves, checked the output against the expected results, and reviewed the code. Both members are responsible for understanding and explaining all submitted code.
