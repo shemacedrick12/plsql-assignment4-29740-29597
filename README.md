@@ -128,7 +128,7 @@ Run every file with **Run Script (F5)**.
 
 ## Contributions
 
-*[SHEMA MFIZI CEDRICK DID 02_FUNCTIONS AND 03_TESTS WHILE IRADUKUNDA EMMANUEL DID 00_SCHEMA AND 01_PROCEDURES ]*
+*[,Both members worked together on design, coding, testing and documentation. All commits were made from one GitHub account (shemacedrick12), as permitted by the lecturer.”SHEMA MFIZI CEDRICK DID 02_FUNCTIONS AND 03_TESTS WHILE IRADUKUNDA EMMANUEL DID 00_SCHEMA AND 01_PROCEDURES ]*
 
 ## Use of AI
 
