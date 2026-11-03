@@ -8,8 +8,8 @@ Course: Database Development with PL/SQL (INSY 8311) | Class group: **C** (Wedne
 
 | Full name | Student ID |
 |---|---|
-| *[SHEMA Mfizi cedrick]* | 29740 |
-| *[Iradukunda Emmanuel]* | 29597 |
+| *SHEMA Mfizi cedrick* | 29740 |
+| *Iradukunda Emmanuel* | 29597 |
 
 ## Application: Student Registration and Grading System
 
