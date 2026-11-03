@@ -1,0 +1,178 @@
+-- =====================================================================
+-- test_error_cases.sql
+-- Every test below is MEANT to fail. Each block catches the error and
+-- prints it, so you can see the exception handling working.
+-- A line starting with "UNEXPECTED" would mean the error was NOT raised.
+-- Run with F5 AFTER the schema, sample data, procedures and functions.
+-- =====================================================================
+SET SERVEROUTPUT ON SIZE UNLIMITED
+
+PROMPT
+PROMPT ===== TEST E1: student does not exist  [screenshot: register_student_unknown_student_output.png]
+PROMPT Expected: ORA-20001
+DECLARE
+  v_id NUMBER;
+BEGIN
+  register_student(9999, 101, v_id);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E2: course does not exist  [screenshot: register_student_unknown_course_output.png]
+PROMPT Expected: ORA-20002
+DECLARE
+  v_id NUMBER;
+BEGIN
+  register_student(1001, 999, v_id);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E3: suspended student  [screenshot: register_student_suspended_output.png]
+PROMPT Expected: ORA-20003 (user-defined exception e_student_not_active)
+DECLARE
+  v_id NUMBER;
+BEGIN
+  register_student(1012, 101, v_id);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E4: already enrolled  [screenshot: register_student_already_enrolled_output.png]
+PROMPT Expected: ORA-20004 (user-defined exception e_already_enrolled)
+DECLARE
+  v_id NUMBER;
+BEGIN
+  register_student(1001, 101, v_id);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E5: course is full  [screenshot: register_student_course_full_output.png]
+PROMPT Expected: ORA-20005 (user-defined exception e_course_full)
+DECLARE
+  v_id NUMBER;
+BEGIN
+  register_student(1004, 105, v_id);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E6: drop a course the student is not enrolled in  [screenshot: drop_enrollment_not_enrolled_output.png]
+PROMPT Expected: ORA-20010 (predefined NO_DATA_FOUND turned into a clear message)
+DECLARE
+  v_deleted PLS_INTEGER;
+BEGIN
+  drop_enrollment(1009, 101, v_deleted);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E7: bulk upload with lists of different length  [screenshot: bulk_upload_grades_bad_input_output.png]
+PROMPT Expected: ORA-20020
+DECLARE
+  v_ins PLS_INTEGER;
+  v_rej PLS_INTEGER;
+BEGIN
+  bulk_upload_grades(101, SYS.ODCINUMBERLIST(1006, 1007), SYS.ODCINUMBERLIST(80), v_ins, v_rej);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E8: bulk upload with a missing course  [screenshot: bulk_upload_grades_unknown_course_output.png]
+PROMPT Expected: ORA-20002
+DECLARE
+  v_ins PLS_INTEGER;
+  v_rej PLS_INTEGER;
+BEGIN
+  bulk_upload_grades(999, SYS.ODCINUMBERLIST(1006), SYS.ODCINUMBERLIST(80), v_ins, v_rej);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E9: bulk upload with mixed good and bad rows (FORALL SAVE EXCEPTIONS)  [screenshot: bulk_upload_grades_partial_errors_output.png]
+PROMPT Row 1 student 1001: already graded            -> rejected by the database (ORA-00001, bulk exception)
+PROMPT Row 2 student 99999: not enrolled              -> skipped
+PROMPT Row 3 student 1006: score 150                  -> skipped
+PROMPT Row 4 student 1008: score 70                   -> inserted
+PROMPT Expected: inserted = 1, rejected = 3
+DECLARE
+  v_ins PLS_INTEGER;
+  v_rej PLS_INTEGER;
+BEGIN
+  bulk_upload_grades(101,
+                     SYS.ODCINUMBERLIST(1001, 99999, 1006, 1008),
+                     SYS.ODCINUMBERLIST(90,   80,    150,  70),
+                     v_ins, v_rej);
+  DBMS_OUTPUT.PUT_LINE('OUT parameters -> inserted: ' || v_ins || ', rejected: ' || v_rej);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E10: transcript of a missing student  [screenshot: print_transcript_unknown_student_output.png]
+PROMPT Expected: ORA-20001
+DECLARE
+  v_gpa NUMBER;
+  v_cr  NUMBER;
+BEGIN
+  print_transcript(9999, v_gpa, v_cr);
+  DBMS_OUTPUT.PUT_LINE('UNEXPECTED: no error was raised');
+EXCEPTION
+  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Caught -> ' || SQLERRM);
+END;
+/
+
+PROMPT
+PROMPT ===== TEST E11: function errors  [screenshot: functions_errors_output.png]
+PROMPT Expected: ORA-20030, ORA-20001, ORA-20002, ORA-20032, ORA-20031, ORA-20033
+DECLARE
+  v_num NUMBER;
+  v_txt VARCHAR2(10);
+BEGIN
+  BEGIN v_txt := get_letter_grade(150);
+  EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('get_letter_grade(150)      -> ' || SQLERRM); END;
+
+  BEGIN v_num := calculate_gpa(9999);
+  EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('calculate_gpa(9999)        -> ' || SQLERRM); END;
+
+  BEGIN v_num := get_available_seats(999);
+  EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('get_available_seats(999)   -> ' || SQLERRM); END;
+
+  BEGIN v_num := find_student_id('Uw');
+  EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('find_student_id(''Uw'')      -> ' || SQLERRM); END;
+
+  BEGIN v_num := find_student_id('Zzz');
+  EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('find_student_id(''Zzz'')     -> ' || SQLERRM); END;
+
+  BEGIN v_num := find_student_id(NULL);
+  EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('find_student_id(NULL)      -> ' || SQLERRM); END;
+END;
+/
+
+PROMPT
+PROMPT ===== Undoing any change made by this script
+ROLLBACK;
